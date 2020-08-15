@@ -1,38 +1,29 @@
 import React from 'react';
-import { AppBar, Tab, Tabs } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    borderRadius: '5px',
-    color: theme.palette.text.primary,
-  },
-}));
+import classes from './tabs.module.scss';
+import { birdSpecies } from '../../data/birds';
 
-const tabs = () => {
-  const [value, setValue] = React.useState(0);
+const tabs = (props) => {
+  const { currentTab } = props;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = () => {
+    // setValue(newValue);
   };
 
-  const classes = useStyles();
+  const setClassName = (index) => (
+    (index === currentTab) ? classes.currentTab : classes.singleTab
+  );
 
-  return <AppBar position="static" className={classes.root}>
-    <Tabs
-      value={value}
-      onChange={handleChange}
-      centered={true}
-      indicatorColor='secondary'
-    >
-      <Tab label="Разминка"/>
-      <Tab label="Воробьиные"/>
-      <Tab label="Лесные птицы"/>
-      <Tab label="Певчие птицы"/>
-      <Tab label="Хищные птицы"/>
-      <Tab label="Морские птицы"/>
-    </Tabs>
-  </AppBar>;
+  const tabsArr = birdSpecies.map((elem, index) => (
+    <div className={setClassName(index)} key={index}>
+      <Typography display='inline' className={classes.tabText}>{elem}</Typography>
+    </div>
+  ));
+
+  return <div className={classes.tabsButtons} onClick={handleChange}>
+    {tabsArr}
+  </div>;
 };
 
 export default tabs;

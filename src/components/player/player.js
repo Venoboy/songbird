@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => (
 
 const player = (props) => {
   const { src } = props;
+
   return <ThemeProvider theme={myDefaultTheme}>
     <AudioPlayer
       src={src}

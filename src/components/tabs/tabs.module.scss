@@ -1,0 +1,37 @@
+.tabsButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 5px;
+  overflow: hidden;
+  @media (max-width: 600px) {
+    flex-direction: column;
+}
+}
+
+.singleTab {
+  flex: 1;
+  background-color: #008966;
+  padding: 5px;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
+}
+
+.tabText {
+  margin: 0 5px;
+  align-self: center;
+  text-align: center;
+  @media (max-width: 600px) {
+    justify-self: center;
+  }
+}
+
+.currentTab {
+  @extend .singleTab;
+  background-color: #00bc8c;
+}
