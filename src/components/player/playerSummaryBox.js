@@ -12,7 +12,7 @@ import defaultPic from '../../assets/pictures/defaultBird.jpg';
 
 const PLAYER_MIN_WIDTH = 400;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: (props) => {
     if (props.parentWidth < PLAYER_MIN_WIDTH) {
       return {
@@ -25,12 +25,9 @@ const useStyles = makeStyles((theme) => ({
     }
     return {
       display: 'flex',
+      flexDirection: 'row',
       borderRadius: '5px',
       padding: '16px',
-      [theme.breakpoints.down('xs')]: {
-        flexDirection: 'column',
-        alignItems: 'center',
-      },
     };
   },
   container: (props) => {
@@ -43,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
     return {
       width: '100%',
       marginLeft: '24px',
-      [theme.breakpoints.down('xs')]: {
-        marginLeft: 0,
-      },
     };
   },
   divider: {
@@ -54,16 +48,19 @@ const useStyles = makeStyles((theme) => ({
   image: (props) => {
     if (props.parentWidth < PLAYER_MIN_WIDTH) {
       return {
+        width: '200px',
+        height: '155px',
         borderRadius: '10px',
-        alignSelf: 'center',
+        alignSelf: 'left',
+        objectFit: 'cover',
       };
     }
     return {
+      width: '200px',
+      height: '155px',
       borderRadius: '10px',
       alignSelf: 'flex-start',
-      [theme.breakpoints.down('xs')]: {
-        alignSelf: 'center',
-      },
+      objectFit: 'cover',
     };
   },
   text: (props) => {
@@ -73,26 +70,21 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
       };
     }
-
     return {
       margin: '10px 0',
-      [theme.breakpoints.down('xs')]: {
-        textAlign: 'center',
-      },
     };
   },
 }));
 
-const playerBox = (props) => {
+const playerSummaryBox = (props) => {
   const {
-    picSrc, name, isSummary, isDefaultBird, audioSrc,
+    picSrc, name, isDefaultBird, audioSrc, species,
   } = props;
   const DEFAULT_NAME = '******';
 
   const parentRef = useRef();
   const { width } = useResize(parentRef);
 
-  myDefaultTheme.isSummary = isSummary;
   myDefaultTheme.parentWidth = width;
   const styles = useStyles(myDefaultTheme);
 
@@ -106,27 +98,24 @@ const playerBox = (props) => {
     currentName = name;
   }
 
-  const latName = isSummary ? (
-    <>
-      <Typography variant='subtitle1'>Parus major</Typography>
-      <Divider className={styles.divider}/>
-    </>
-  ) : null;
-
   return <Paper
     className={styles.root}
     ref={parentRef}
   >
-    <img className={styles.image} src={currentPicSrc} alt="bird"/>
+    <img
+      className={styles.image}
+      src={currentPicSrc}
+      alt="bird"/>
     <Box className={styles.container}>
       <Typography className={styles.text} variant='h5'>
         {currentName}
       </Typography>
       <Divider className={styles.divider}/>
-      {latName}
+      <Typography variant='subtitle1'>{species}</Typography>
+      <Divider className={styles.divider}/>
       <Player src={audioSrc}/>
     </Box>
   </Paper>;
 };
 
-export default playerBox;
+export default playerSummaryBox;

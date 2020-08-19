@@ -3,8 +3,7 @@ import { Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import colors from '../../materialStyles/colors';
-import PlayerBox from '../player/playerBox';
-import defaultPic from '../../assets/pictures/defaultBird.jpg';
+import PlayerSummaryBox from '../player/playerSummaryBox';
 
 const useStyles = makeStyles(() => (
   {
@@ -18,29 +17,29 @@ const useStyles = makeStyles(() => (
 ));
 
 const summary = (props) => {
-  const { isDetailed } = props;
+  const { detailedBird } = props;
   const styles = useStyles();
-  let startMessage;
-  if (isDetailed) {
-    startMessage = <Paper className={styles.root}>
-      <PlayerBox
-        name='Ястреб'
-        picSrc={defaultPic}
-        isSummary={true}
+  let summaryMessage;
+  if (detailedBird) {
+    summaryMessage = <Paper className={styles.root}>
+      <PlayerSummaryBox
+        name={detailedBird.name}
+        picSrc={detailedBird.image}
+        species={detailedBird.species}
       />
       <Typography>
-        Описание птицы.
+        {detailedBird.description}
       </Typography>
     </Paper>;
   } else {
-    startMessage = <Paper className={styles.root}>
+    summaryMessage = <Paper className={styles.root}>
       <Typography>
         Послушайте плеер. <br/>
         Выберите птицу из списка.
       </Typography>
     </Paper>;
   }
-  return startMessage;
+  return summaryMessage;
 };
 
 export default summary;

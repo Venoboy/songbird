@@ -21,8 +21,15 @@ const variants = (props) => {
 
   const variantsElems = currentData.map((bird, index) => (
     <Variant
-      key={index}
+      key={bird.id}
       bird={bird}
+      answerId={props.answerId}
+      setDetailedBird={props.setDetailedBird}
+      setNotClickable={props.setNotClickable}
+      variantsClickable={props.variantsClickable}
+      scoreHandler={props.scoreHandler}
+      detailedBird={props.detailedBird}
+      setReadyNextChapter={props.setReadyNextChapter}
       hasDivider={index < currentData.length - 1}
     />
   ));

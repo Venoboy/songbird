@@ -1,6 +1,6 @@
 module.exports = {
-  'ecmaFeatures': {
-    'jsx': true,
+  ecmaFeatures: {
+    jsx: true,
     modules: true,
   },
   env: {
@@ -11,7 +11,7 @@ module.exports = {
     'airbnb-base',
     'plugin:react/recommended'
   ],
-  'rules': {
+  rules: {
     'react/no-set-state': 'off'
   },
   globals: {
@@ -24,7 +24,7 @@ module.exports = {
     sourceType: 'module',
     // allowImportExportEverywhere: true,
   },
-  'plugins': [
+  plugins: [
     'react'
   ]
 };
