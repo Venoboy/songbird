@@ -1,11 +1,16 @@
 import React from 'react';
 import {
-  Button, Grid, Paper, Typography,
+  Button,
+  Grid,
+  Paper,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';
 import countScore from '../../helpers/countScore';
+import victoryImg from '../../assets/pictures/King_Red_-_Angry_Birds.png';
+import winSound from '../../assets/sound/clearWin.wav';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,6 +29,17 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '5rem',
     },
   },
+  subHeader: {
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '1rem',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2rem',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '3rem',
+    },
+  },
   numbers: {
     fontWeight: 'bold',
   },
@@ -31,24 +47,50 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginTop: '100px',
   },
+  image: {
+    width: '50%',
+    marginTop: '30px',
+  },
 }));
 
+const MAX_SCORE = 30;
+
 const winScreen = (props) => {
+  const { score } = props;
   const reset = () => {
     props.resetScore();
     countScore('reset');
   };
 
   const styles = useStyles(myDefaultTheme);
+
+  let middleContent = <Typography>
+        Вы прошли викторину и набрали <span className={styles.numbers}>{score}</span>{' '}
+        из <span className={styles.numbers}>{MAX_SCORE}</span> возможных баллов
+      </Typography>;
+
+  if (score === MAX_SCORE) {
+    const audio = new Audio(winSound);
+    audio.play();
+    middleContent = <>
+      <Typography className={styles.subHeader}>
+        Вы - орнитолог 80lvl.
+      </Typography>
+      <Typography>
+        Викторина пройдена без единой ошибки!
+      </Typography>
+      <img
+        src={victoryImg}
+        className={styles.image}
+      />
+      </>;
+  }
   return <Grid item>
     <Paper className={styles.container}>
       <Typography className={styles.headerStyle}>
         Поздравляем!
       </Typography>
-      <Typography>
-        Вы прошли викторину и набрали <span className={styles.numbers}>22</span>{' '}
-        из <span className={styles.numbers}>30</span> возможных баллов
-      </Typography>
+      {middleContent}
       <Button
         className={styles.button}
         fullWidth

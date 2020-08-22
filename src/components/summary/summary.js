@@ -26,6 +26,7 @@ const summary = (props) => {
         name={detailedBird.name}
         picSrc={detailedBird.image}
         species={detailedBird.species}
+        audioSrc={detailedBird.audio}
       />
       <Typography>
         {detailedBird.description}

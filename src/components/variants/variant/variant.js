@@ -52,6 +52,7 @@ const variant = (props) => {
   }
 
   const variantClickHandler = () => {
+    setDetailedBird(bird);
     if (!variantsClickable) return null;
     if (answerId === id) {
       setVarState(variantState.right);
@@ -64,7 +65,6 @@ const variant = (props) => {
       scoreHandler(countScore());
       audioWrong.play();
     }
-    setDetailedBird(bird);
     return null;
   };
 

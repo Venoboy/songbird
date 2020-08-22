@@ -19,6 +19,8 @@ const variants = (props) => {
   const styles = useStyles();
   const { currentData } = props;
 
+  console.log('Ответ: ', (props.answerId + 1));
+
   const variantsElems = currentData.map((bird, index) => (
     <Variant
       key={bird.id}

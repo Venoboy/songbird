@@ -120,7 +120,10 @@ class App extends Component {
           />
         </Grid>
       </>
-    ) : <WinScreen resetScore={this.resetScore}/>;
+    ) : <WinScreen
+      resetScore={this.resetScore}
+      score={this.state.score}
+    />;
 
     return (
       <ScopedCssBaseline

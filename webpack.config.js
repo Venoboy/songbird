@@ -75,7 +75,7 @@ module.exports = (env, options) => {
           },
         },
         {
-          test: /\.mp3$/i,
+          test: /\.(mp3|wav)$/i,
           loader: 'file-loader',
           options: {
             outputPath: 'assets/audio/',
@@ -101,6 +101,7 @@ module.exports = (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: 'index.html',
+        favicon: './favicon.ico',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
