@@ -1,3 +1,5 @@
+import grifSound from '../assets/sound/zvuk-chernogo-grifa.mp3';
+
 const birdSpecies = [
   'Нелетающие птицы', 'Опасные птицы', 'Городские птицы', 'Ночные птицы', 'Водоплавающие', 'Птицы Беларуси',
 ];
@@ -84,7 +86,7 @@ const birdsData = [
       species: 'Torgos tracheliotus',
       description: 'Хотя африканские ушастые грифы в большинстве своём и питаются падалью, они очень крупные и агрессивные, поэтому при желании стаей могут напасть на довольно крупное животное, и тогда ему вряд ли удастся сбежать.',
       image: 'https://live.staticflickr.com/7144/6526355327_b5391f30cf_w_d.jpg',
-      audio: 'http://boobooka.com/wp-content/uploads/2019/02/zvuk-chernogo-grifa.mp3',
+      audio: grifSound,
     },
     {
       id: 5,

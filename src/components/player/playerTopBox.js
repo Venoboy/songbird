@@ -78,7 +78,7 @@ const playerTopBox = (props) => {
         {currentName}
       </Typography>
       <Divider className={styles.divider}/>
-      <Player src={audioSrc}/>
+      <Player src={audioSrc} readyNextChapter={props.readyNextChapter}/>
     </Box>
   </Paper>;
 };

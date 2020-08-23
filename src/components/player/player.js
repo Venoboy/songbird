@@ -46,11 +46,13 @@ const useStyles = makeStyles((theme) => (
 ));
 
 const player = (props) => {
-  const { src } = props;
+  const { src, readyNextChapter } = props;
+
+  const currentSrc = readyNextChapter ? '' : src;
 
   return <ThemeProvider theme={myDefaultTheme}>
     <AudioPlayer
-      src={src}
+      src={currentSrc}
       elevation={0}
       variation='primary'
       spacing={3}

@@ -91,6 +91,7 @@ class App extends Component {
             audioSrc={answerBirdData.audio}
             name={answerBirdData.name}
             picSrc={answerBirdData.image}
+            readyNextChapter={this.state.readyNextChapter}
           />
         </Grid>
         <Grid item container spacing={3}>
