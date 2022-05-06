@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import {
   Box, Divider, Paper, Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 import Player from './player';
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';

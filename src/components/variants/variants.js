@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@mui/styles';
+import List from '@mui/material/List';
+import Paper from '@mui/material/Paper';
 
 import colors from '../../materialStyles/colors';
 import Variant from './variant/variant';
@@ -18,8 +18,6 @@ const useStyles = makeStyles(() => ({
 const variants = (props) => {
   const styles = useStyles();
   const { currentData } = props;
-
-  console.log('Ответ: ', (props.answerId + 1));
 
   const variantsElems = currentData.map((bird, index) => (
     <Variant

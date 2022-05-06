@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@mui/styles';
 import colors from '../../../materialStyles/colors';
 
 import classes from './variant.module.scss';

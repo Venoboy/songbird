@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/system';
 import logo from '../../assets/pictures/logo.svg';
 import classes from './header.module.scss';
 import Score from './score/scoreBox';

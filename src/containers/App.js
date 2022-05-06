@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'fontsource-roboto';
-import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
-import { Grid } from '@material-ui/core';
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+import { Grid } from '@mui/material';
 
 import Header from '../components/header/header';
 import classes from './app.module.scss';

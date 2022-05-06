@@ -2,18 +2,23 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
 
-
-  const config = {
+  return {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'none' : 'source-map',
     entry: ['./src/index.js', './src/scss/style.scss'],
     output: {
       path: path.join(__dirname, '/dist'),
       filename: 'index.js',
+    },
+    resolve: {
+      alias: {
+        fs: 'memfs',
+      },
     },
     module: {
       rules: [
@@ -25,20 +30,10 @@ module.exports = (env, options) => {
           },
         },
         {
-          enforce: 'pre',
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          loader: 'eslint-loader',
-        },
-        {
           test: /\.(sa|sc|c)ss$/i,
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
-              options: {
-                hmr: process.env.NODE_ENV === 'development',
-                // reloadAll: true,
-              },
             },
             {
               loader: 'css-loader',
@@ -69,29 +64,27 @@ module.exports = (env, options) => {
         },
         {
           test: /\.(png|jpe?g|gif|svg)$/i,
-          loader: 'file-loader',
-          options: {
-            outputPath: 'assets/img/',
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/img/[hash][ext][query]',
           },
         },
         {
           test: /\.(mp3|wav)$/i,
-          loader: 'file-loader',
-          options: {
-            outputPath: 'assets/audio/',
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/audio/[hash][ext][query]',
           },
         },
         {
           test: /\.(ico)$/,
-          loader: 'file-loader?name=[name].[ext]',
+          type: 'asset/resource',
         },
         {
           test: /\.(ttf|eot|woff|woff2)$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/fonts/',
-            },
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/fonts/[hash][ext][query]',
           },
         },
       ],
@@ -107,15 +100,7 @@ module.exports = (env, options) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
+      new ESLintPlugin(),
     ],
-    devServer: {
-      contentBase: './dist',
-      writeToDisk: true,
-      clientLogLevel: 'silent',
-      hot: false,
-      open: 'chrome',
-    },
   };
-
-  return config;
 };

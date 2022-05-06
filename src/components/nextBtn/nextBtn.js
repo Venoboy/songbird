@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Paper } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 import colors from '../../materialStyles/colors';
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';
