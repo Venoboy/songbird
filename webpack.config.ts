@@ -1,16 +1,18 @@
-const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+import * as path from 'path';
+import {Configuration} from 'webpack';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
+import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 
-module.exports = (env, options) => {
-  const isProduction = options.mode === 'production';
+export default (env: Record<string, any>, args: Record<string, any>): Configuration => {
+  const isProduction = args.mode === 'production';
 
   return {
     mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? 'none' : 'source-map',
-    entry: ['./src/index.js', './src/scss/style.scss'],
+    devtool: isProduction ? false : 'source-map',
+    entry: ['./src/index.tsx', './src/scss/style.scss'],
     output: {
       path: path.join(__dirname, '/dist'),
       filename: 'index.js',
@@ -19,6 +21,8 @@ module.exports = (env, options) => {
       alias: {
         fs: 'memfs',
       },
+      extensions: [".ts", ".tsx", "..."],
+      plugins: [new TsconfigPathsPlugin()]
     },
     module: {
       rules: [
@@ -87,6 +91,10 @@ module.exports = (env, options) => {
             filename: 'assets/fonts/[hash][ext][query]',
           },
         },
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+        },
       ],
     },
 
@@ -100,7 +108,7 @@ module.exports = (env, options) => {
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
-      new ESLintPlugin(),
+      new ESLintWebpackPlugin(),
     ],
   };
 };

@@ -1,19 +1,28 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import {
   Box, Divider, Paper, Typography,
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import Player from './player';
-import myDefaultTheme from '../../materialStyles/myDefaultTheme';
+import Player from './Player';
 import colors from '../../materialStyles/colors';
 import useResize from '../../helpers/useResize';
-import defaultPic from '../../assets/pictures/defaultBird.jpg';
+
+interface IStyleProps {
+  parentWidth: number;
+}
+
+interface IPlayerSummaryBox {
+  picSrc: string;
+  name: string;
+  audioSrc: string;
+  species: string;
+}
 
 const PLAYER_MIN_WIDTH = 400;
 
 const useStyles = makeStyles(() => ({
-  root: (props) => {
+  root: (props: IStyleProps) => {
     if (props.parentWidth < PLAYER_MIN_WIDTH) {
       return {
         display: 'flex',
@@ -76,27 +85,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const playerSummaryBox = (props) => {
+const playerSummaryBox = (props: IPlayerSummaryBox) => {
   const {
-    picSrc, name, isDefaultBird, audioSrc, species,
+    picSrc, name, audioSrc, species,
   } = props;
-  const DEFAULT_NAME = '******';
 
   const parentRef = useRef();
   const { width } = useResize(parentRef);
 
-  myDefaultTheme.parentWidth = width;
-  const styles = useStyles(myDefaultTheme);
-
-  let currentPicSrc;
-  let currentName;
-  if (isDefaultBird) {
-    currentPicSrc = defaultPic;
-    currentName = DEFAULT_NAME;
-  } else {
-    currentPicSrc = picSrc;
-    currentName = name;
+  const styleProps = {
+    parentWidth: width,
   }
+  const styles = useStyles(styleProps);
 
   return <Paper
     className={styles.root}
@@ -104,11 +104,11 @@ const playerSummaryBox = (props) => {
   >
     <img
       className={styles.image}
-      src={currentPicSrc}
+      src={picSrc}
       alt="bird"/>
     <Box className={styles.container}>
       <Typography className={styles.text} variant='h5'>
-        {currentName}
+        {name}
       </Typography>
       <Divider className={styles.divider}/>
       <Typography variant='subtitle1'>{species}</Typography>

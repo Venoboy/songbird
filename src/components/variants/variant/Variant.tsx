@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText/ListItemText';
-import Divider from '@mui/material/Divider';
-import { makeStyles } from '@mui/styles';
+import { useEffect, useState } from 'react';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../../materialStyles/colors';
 
-import classes from './variant.module.scss';
+import classes from './Variant.module.scss';
 import countScore from '../../../helpers/countScore';
 import errorMp3 from '../../../assets/sound/error.mp3';
 import successMp3 from '../../../assets/sound/success.mp3';
 import variantState from '../variantState';
+import { scoreEnum } from '../../../helpers/helpers.types';
+import { IVariant } from './Variant.types';
 
 const useStyles = makeStyles({
   divider: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-const variant = (props) => {
+const Variant = (props: IVariant) => {
   const {
     hasDivider, bird, answerId, variantsClickable, scoreHandler,
     setReadyNextChapter, setDetailedBird, setNotClickable,
@@ -56,7 +58,7 @@ const variant = (props) => {
     if (!variantsClickable) return null;
     if (answerId === id) {
       setVarState(variantState.right);
-      scoreHandler(countScore('win'));
+      scoreHandler(countScore(scoreEnum.WIN));
       audioRight.play();
       setReadyNextChapter(true);
       setNotClickable();
@@ -82,4 +84,4 @@ const variant = (props) => {
   </>;
 };
 
-export default variant;
+export default Variant;

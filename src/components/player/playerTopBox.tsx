@@ -1,13 +1,20 @@
-import React from 'react';
 import {
   Box, Divider, Paper, Typography,
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import Player from './player';
+import Player from './Player';
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';
 import colors from '../../materialStyles/colors';
 import defaultPic from '../../assets/pictures/defaultBird.jpg';
+
+interface IPlayerTopBox {
+  picSrc: string;
+  name: string;
+  isDefaultBird: boolean;
+  audioSrc: string;
+  readyNextChapter: boolean;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: () => ({
@@ -48,9 +55,9 @@ const useStyles = makeStyles((theme) => ({
   }),
 }));
 
-const playerTopBox = (props) => {
+const playerTopBox = (props: IPlayerTopBox) => {
   const {
-    picSrc, name, isDefaultBird, audioSrc,
+    picSrc, name, isDefaultBird, audioSrc, readyNextChapter,
   } = props;
   const DEFAULT_NAME = '******';
 
@@ -78,7 +85,7 @@ const playerTopBox = (props) => {
         {currentName}
       </Typography>
       <Divider className={styles.divider}/>
-      <Player src={audioSrc} readyNextChapter={props.readyNextChapter}/>
+      <Player src={audioSrc} readyNextChapter={readyNextChapter}/>
     </Box>
   </Paper>;
 };

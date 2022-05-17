@@ -1,17 +1,20 @@
-import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography } from '@material-ui/core';
 
 import classes from './tabs.module.scss';
 import { birdSpecies } from '../../data/birds';
 
-const tabs = (props) => {
+interface ITabs {
+  currentTab: number;
+}
+
+const tabs = (props: ITabs) => {
   const { currentTab } = props;
 
   const handleChange = () => {
     // setValue(newValue);
   };
 
-  const setClassName = (index) => (
+  const setClassName = (index: number) => (
     (index === currentTab) ? classes.currentTab : classes.singleTab
   );
 

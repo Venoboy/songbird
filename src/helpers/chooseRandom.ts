@@ -1,4 +1,4 @@
-const chooseRandom = (n) => (
+const chooseRandom = (n: number) => (
   Math.round(Math.random() * n)
 );
 

@@ -1,16 +1,12 @@
-import React from 'react';
-import {
-  Button,
-  Grid,
-  Paper,
-  Typography,
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, Grid, Paper, Typography, } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';
 import countScore from '../../helpers/countScore';
 import victoryImg from '../../assets/pictures/King_Red_-_Angry_Birds.png';
 import winSound from '../../assets/sound/clearWin.wav';
+import { scoreEnum } from '../../helpers/helpers.types';
+import { IWinScreen } from './WinScreen.types';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
 
 const MAX_SCORE = 30;
 
-const winScreen = (props) => {
+const WinScreen = (props: IWinScreen) => {
   const { score } = props;
   const reset = () => {
     props.resetScore();
-    countScore('reset');
+    countScore(scoreEnum.RESET);
   };
 
   const styles = useStyles(myDefaultTheme);
@@ -71,7 +67,7 @@ const winScreen = (props) => {
 
   if (score === MAX_SCORE) {
     const audio = new Audio(winSound);
-    audio.play();
+    audio.play().catch(console.error);
     middleContent = <>
       <Typography className={styles.subHeader}>
         Вы - орнитолог 80lvl.
@@ -82,6 +78,7 @@ const winScreen = (props) => {
       <img
         src={victoryImg}
         className={styles.image}
+        alt='victory'
       />
       </>;
   }
@@ -102,4 +99,4 @@ const winScreen = (props) => {
   </Grid>;
 };
 
-export default winScreen;
+export default WinScreen;

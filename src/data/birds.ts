@@ -1,10 +1,11 @@
 import grifSound from '../assets/sound/zvuk-chernogo-grifa.mp3';
+import { birdSpeciesType, IBirdsData } from './birds.types';
 
-const birdSpecies = [
+const birdSpecies: birdSpeciesType = [
   'Нелетающие птицы', 'Опасные птицы', 'Городские птицы', 'Ночные птицы', 'Водоплавающие', 'Птицы Беларуси',
 ];
 
-const birdsData = [
+const birdsData: IBirdsData = [
   [
     {
       id: 1,
@@ -301,7 +302,7 @@ const birdsData = [
       name: 'Коршун черный',
       species: 'Milvus migrans',
       description: 'Питается главным образом падалью, в основном рыбой, и другими отходами. Добычу также составляют млекопитающие, птицы, пресмыкающиеся, лягушки, живая рыба, насекомые, моллюски, ракообразные и черви. Места обитания — различные типы леса, обычно вблизи водоёмов.',
-      image: 'https://live.staticflickr.com/65535/40742112063_dea0efe88e_w_d.jpg',
+      image: 'https://live.staticflickr.com/65535/49989779076_e4109ac3db_m.jpg',
       audio: 'https://www.xeno-canto.org/sounds/uploaded/LHCOINSOBZ/XC572730-200701_01Milvus%20migrans%20pousado%20no%20eucalipto%2C%20chamada%20con%20outro%20dando%20voltas%20arredor%20%2C%20Bra%C3%B1as%20de%20La%C3%AD%C3%B1o%2C%20Dodro%2C%209.30%20nubrado%20despois%20de%20chuvia.mp3',
     },
   ],

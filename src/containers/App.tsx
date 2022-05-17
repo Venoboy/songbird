@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import 'fontsource-roboto';
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
-import { Grid } from '@mui/material';
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+import { Grid } from '@material-ui/core';
 
-import Header from '../components/header/header';
+import Header from '../components/header/Header';
 import classes from './app.module.scss';
-import Tabs from '../components/tabs/tabs';
-import PlayerTopBox from '../components/player/playerTopBox';
-import Variants from '../components/variants/variants';
-import Summary from '../components/summary/summary';
-import NextBtn from '../components/nextBtn/nextBtn';
+import Tabs from 'components/tabs/tabs';
+import PlayerTopBox from 'components/player/playerTopBox';
+import Variants from 'components/variants/Variants';
+import Summary from 'components/summary/summary';
+import NextBtn from 'components/nextBtn/NextBtn';
 import { birdsData } from '../data/birds';
 import chooseRandom from '../helpers/chooseRandom';
-import WinScreen from '../components/winScreen/winScreen';
+import WinScreen from 'components/winScreen/WinScreen';
+import {
+  goNextChapterType,
+  IAppState, resetScoreType,
+  scoreHandlerType,
+  setDetailedBirdType, setNotClickableType,
+  setReadyNextChapterType
+} from './App.types';
 
-class App extends Component {
-  state = {
+class App extends Component<Record<string, never>, IAppState> {
+  state: IAppState = {
     currentTab: 0,
     isDefaultBird: true,
     currentData: birdsData[0],
@@ -26,36 +33,32 @@ class App extends Component {
     score: 0,
     variantsClickable: true,
     isResultScreen: false,
-    isTrue: true,
   };
 
-  setNotClickable = () => {
+  setNotClickable: setNotClickableType = () => {
     this.setState({ variantsClickable: false });
   };
 
-  resetScore = () => {
+  resetScore: resetScoreType = () => {
     this.setState({
       score: 0,
       isResultScreen: false,
     });
   };
 
-  setReadyNextChapter = (ready) => {
+  setReadyNextChapter: setReadyNextChapterType = (ready) => {
     this.setState({
       readyNextChapter: ready,
       isDefaultBird: !ready,
     });
   };
 
-  goNextChapter = () => {
+  goNextChapter: goNextChapterType = () => {
     if (!this.state.readyNextChapter) return;
+
     const isLastChapter = this.state.currentTab === birdsData.length - 1;
-    if (isLastChapter) {
-      this.setState({
-        isResultScreen: true,
-      });
-    }
-    this.setState((prevState) => ({
+
+    this.setState((prevState): IAppState => ({
       currentTab: isLastChapter ? 0 : prevState.currentTab + 1,
       isDefaultBird: true,
       currentData: isLastChapter ? birdsData[0] : birdsData[prevState.currentTab + 1],
@@ -66,15 +69,15 @@ class App extends Component {
       variantsClickable: true,
       detailedBird: undefined,
       score: prevState.score,
-      isLastChapter: false,
+      isResultScreen: isLastChapter
     }));
   };
 
-  scoreHandler = (result) => {
+  scoreHandler: scoreHandlerType = (result) => {
     this.setState({ score: result });
   };
 
-  setDetailedBird = (bird) => {
+  setDetailedBird: setDetailedBirdType = (bird) => {
     this.setState({
       detailedBird: bird,
     });
@@ -82,7 +85,6 @@ class App extends Component {
 
   render() {
     const answerBirdData = this.state.currentData[this.state.answerBirdId];
-
     const output = !this.state.isResultScreen ? (
       <>
         <Grid item>
@@ -132,14 +134,14 @@ class App extends Component {
       >
         <Grid
           container
-          direction='column'
+          direction="column"
           spacing={3}
         >
           <Grid item>
-            <Header score={this.state.score}/>
+            <Header score={this.state.score} />
           </Grid>
           <Grid item>
-            <Tabs currentTab={this.state.currentTab}/>
+            <Tabs currentTab={this.state.currentTab} />
           </Grid>
           {output}
         </Grid>

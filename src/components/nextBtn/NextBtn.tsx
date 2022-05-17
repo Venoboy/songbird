@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Paper } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import colors from '../../materialStyles/colors';
 import myDefaultTheme from '../../materialStyles/myDefaultTheme';
+import { goNextChapterType } from '../../containers/App.types';
 
 const useStyles = makeStyles((props) => (
   {
@@ -16,9 +16,14 @@ const useStyles = makeStyles((props) => (
   }
 ));
 
-const nextBtn = (props) => {
+interface INextBnt {
+  readyNextChapter: boolean;
+  goNextChapter: goNextChapterType;
+}
+
+const NextBtn = (props: INextBnt) => {
   const { readyNextChapter, goNextChapter } = props;
-  myDefaultTheme.readyNextChapter = readyNextChapter;
+  // myDefaultTheme.readyNextChapter = readyNextChapter;
   const styles = useStyles(myDefaultTheme);
   return <Paper className={styles.buttonContainer}>
     <Button
@@ -33,4 +38,4 @@ const nextBtn = (props) => {
   </Paper>;
 };
 
-export default nextBtn;
+export default NextBtn;

@@ -1,9 +1,13 @@
-import React from 'react';
-import { Paper, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Paper, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import colors from '../../materialStyles/colors';
 import PlayerSummaryBox from '../player/playerSummaryBox';
+import { IBirdData } from '../../data/birds.types';
+
+interface ISummary {
+  detailedBird: IBirdData | undefined;
+}
 
 const useStyles = makeStyles(() => (
   {
@@ -16,7 +20,7 @@ const useStyles = makeStyles(() => (
   }
 ));
 
-const summary = (props) => {
+const summary = (props: ISummary) => {
   const { detailedBird } = props;
   const styles = useStyles();
   let summaryMessage;

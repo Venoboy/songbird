@@ -2,10 +2,13 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    amd: true,
+    node: true
   },
   extends: [
-    'airbnb-base',
-    'plugin:react/recommended',
+    "eslint:recommended",
+    "plugin:react/jsx-runtime",
+    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
     'react/no-set-state': 'off',
@@ -14,7 +17,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     requireConfigFile: false,
@@ -23,6 +26,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    '@typescript-eslint',
   ],
   settings: {
     react: {

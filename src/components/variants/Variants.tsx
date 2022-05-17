@@ -1,10 +1,10 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import List from '@mui/material/List';
-import Paper from '@mui/material/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
 
 import colors from '../../materialStyles/colors';
-import Variant from './variant/variant';
+import Variant from './variant/Variant';
+import { IVariants } from './Variants.types';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const variants = (props) => {
+const Variants = (props: IVariants) => {
   const styles = useStyles();
   const { currentData } = props;
 
@@ -46,4 +46,4 @@ const variants = (props) => {
   );
 };
 
-export default variants;
+export default Variants;
